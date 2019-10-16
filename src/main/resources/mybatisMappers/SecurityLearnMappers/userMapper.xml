@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiki.blog.SecurityLearn.UserMapper">
+
+
+    <select id="getUserByUserName"
+            parameterType="string"
+            resultType="com.yiki.blog.SecurityLearn.User">
+       select * from learn_security_user where  username =#{name}
+   </select>
+
+    <select id="getPermissionByUserName"
+            parameterType="string"
+            resultType="com.yiki.blog.SecurityLearn.Permission"
+    >
+        SELECT perm.*
+            FROM
+            learn_security_user user
+            INNER JOIN learn_security_user_role user_role ON user.userid = user_role.user_id
+            INNER JOIN learn_security_per_role  per_role  ON user_role.role_id = per_role.role_id
+            INNER JOIN learn_security_permission perm     ON per_role.perm_id = perm.permid
+            WHERE user.username= #{name};
+    </select>
+
+
+</mapper>
