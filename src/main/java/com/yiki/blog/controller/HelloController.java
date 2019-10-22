@@ -1,5 +1,6 @@
 package com.yiki.blog.controller;
 
+import com.yiki.blog.Service.UserService;
 import com.yiki.blog.bean.User;
 import com.yiki.blog.mapper.UserYmlMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,13 @@ public class HelloController {
     }
 
     @Autowired
-    UserYmlMapper userYmlMapper;
+    private UserService userService;
 
 
 
     @GetMapping("/user/{id}")
     public User getUser(@PathVariable("id") Integer id) {
-        return userYmlMapper.getUserById(id);
+        return userService.getUserbyId(id);
     }
 
 
