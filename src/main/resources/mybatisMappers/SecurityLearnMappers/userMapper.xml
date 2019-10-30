@@ -24,5 +24,12 @@
             WHERE user.username= #{name};
     </select>
 
+    <insert id="InsertUser" parameterType="com.yiki.blog.bean.User"
+            useGeneratedKeys="true" keyProperty="userID">
+    insert into learn_security_user
+    (userName, passWord)
+    values
+    (#{userName}, #{passWord})
+    </insert>
 
 </mapper>

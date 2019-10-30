@@ -11,4 +11,6 @@ public interface UserMapper {
 
     //查询用户拥有的权限
     public List<Permission> getPermissionByUserName(String name);
+
+    public  void InsertUser(User user);
 }

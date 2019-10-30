@@ -5,11 +5,12 @@
 <mapper namespace="com.yiki.blog.mapper.UserYmlMapper">
 
 
-
     <!--根据用户ID查询-->
     <select id="getUserById" resultType="com.yiki.blog.bean.User">
        select * from user where  uid =#{uid}
    </select>
+
+
 
 
 

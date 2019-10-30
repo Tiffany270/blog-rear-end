@@ -23,7 +23,7 @@ public class TestController {
     @GetMapping("/name1")
     public User index1() {
 
-        User user = new User();
+        User user;
         user = userMapper.getUserByUserName("yiki");
         List<Permission> permList = userMapper.getPermissionByUserName("yiki");
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
