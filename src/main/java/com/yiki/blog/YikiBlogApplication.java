@@ -1,8 +1,6 @@
 package com.yiki.blog;
 
-import com.yiki.blog.SecurityLearn.JwtCreateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
+import com.yiki.blog.SecurityLearn.JwtUtil;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,7 +23,7 @@ public class YikiBlogApplication {
 
         //jwt 相关
 
-        JwtCreateUtil.createJwt();
+        JwtUtil.createJwt();
 
     }
 
