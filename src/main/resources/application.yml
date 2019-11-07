@@ -45,5 +45,7 @@ server:
   port: 2727
 mybatis:
   config-location: classpath:mybatisConfig.xml
-  mapper-locations: classpath:mybatisMappers/*.xml,
+  mapper-locations:
+    classpath:mybatisMappers/*.xml,
     classpath:mybatisMappers/SecurityLearnMappers/*.xml
+    classpath:mybatisMappers/JwtAuthMappers/*.xml

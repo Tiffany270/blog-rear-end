@@ -16,7 +16,7 @@ public class UserService {
     //1.redis注入
     @Autowired
     private RedisTemplate redisTemplate;
-    public User getUserbyId(Integer uid) {
+    public User getUserbyIdRedis(Integer uid) {
 
         //序列化
         redisTemplate.setKeySerializer(new StringRedisSerializer());
@@ -30,6 +30,11 @@ public class UserService {
             ops.set("user_" + uid, user);
         }
 
+        return user;
+    }
+
+    public User getUserbyId(Integer uid) {
+        User user = usermapper.getUserById(uid);
         return user;
     }
 }

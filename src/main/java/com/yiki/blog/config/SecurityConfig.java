@@ -1,5 +1,7 @@
-package com.yiki.blog.SecurityLearn;
+package com.yiki.blog.config;
 
+import com.yiki.blog.SecurityLearn.YikiUserDetailService;
+import com.yiki.blog.jwtAuth.TokenAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -7,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 //1配置类
 @Configuration
@@ -21,7 +24,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //7.在登录页用封装好的userdetail
     @Autowired
     private YikiUserDetailService userDetailService;
-
 
 
     /**
@@ -45,10 +47,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 */
         /*
-        * 6.2 B自定义service类
-        * */
-        auth.userDetailsService(userDetailService)
-                .passwordEncoder(new BCryptPasswordEncoder());;
+         * 6.2 B自定义service类
+         * */
+//        auth.userDetailsService(userDetailService)
+//                .passwordEncoder(new BCryptPasswordEncoder());
 
     }
 
@@ -61,12 +63,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+//                 http.authorizeRequests()
+//                .antMatchers("/security/*")
+//                .hasAnyAuthority("admin")
+//                .and()
+//                .httpBasic();
+
         /*6-1拦截表达式A.httpBasic
-        http.authorizeRequests()
-                .antMatchers("/**")
-                .fullyAuthenticated()
-                .and()
-                .httpBasic();
 
                           @isAuthenticated()
                           Returns true if the user is not anonymous
@@ -78,11 +81,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         /*B.formLogin
          * */
+
+
         http.cors().disable();
-        http.authorizeRequests()
-                .antMatchers("/security/*").hasAnyAuthority("ROLE_SEARCH,ROLE_DELETE")
-                .and().csrf().disable()//禁止自带跨域
-                .formLogin();
+        http.csrf().disable();
+
+//        http.authorizeRequests()
+//                .antMatchers("/jwt/register").permitAll()
+//                .antMatchers("/jwt/login").permitAll()
+//                .antMatchers("/jwt/test1").authenticated()
+//                .formLogin();
+//        http.addFilterBefore(new TokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
     }
 
 }

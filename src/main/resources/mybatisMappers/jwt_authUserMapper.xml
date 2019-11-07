@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yiki.blog.jwtAuth.AuthUserMapper">
+
+
+    <insert id="insertAuthUser" parameterType="com.yiki.blog.jwtAuth.AuthUser"
+            useGeneratedKeys="true" keyProperty="auth_id">
+    insert into jwt_authuser
+    (auth_name,auth_psw,auth_role)
+    values
+    (#{auth_name}, #{auth_psw}, #{auth_role})
+    </insert>
+
+    <select id="getAuthUserByNameAndPsw"
+            resultType="com.yiki.blog.jwtAuth.AuthUser">
+       select auth_name,auth_role,auth_id from jwt_authuser where  auth_name = #{name} and auth_psw = #{psw}
+   </select>
+
+    <select id="getAuthUserById"
+            resultType="com.yiki.blog.jwtAuth.AuthUser">
+       select auth_name,auth_role,auth_id from jwt_authuser where  auth_id = #{authId}
+   </select>
+
+
+
+
+</mapper>
